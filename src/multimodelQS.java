@@ -10,16 +10,21 @@
 	import com.intersystems.xep.PersisterFactory;
 	import com.intersystems.jdbc.IRISConnection;
 
+
+	//Purpose: This class shows a multimodel example in ObjectScript. SQL is used to display airports,
+	//objects are stored directly, and a custom data structure is used to determine airfare.
 	public class multimodelQS {
 
 		public static void main(String[] args) {
 			String user = "SuperUser";
 			String pass = "SYS";
+			String server = "localhost";
+			int port = 51773;
 			
 			try {
 				//Connect to database using EventPersister, which is based on IRISDataSource
 		        EventPersister xepPersister = PersisterFactory.createPersister();
-		        xepPersister.connect("localhost",51773,"User",user,pass); 
+		        xepPersister.connect(server,port,"User",user,pass); 
 		        System.out.println("Connected to InterSystems IRIS via JDBC.");
 		        xepPersister.deleteExtent("Demo.Airport");   // remove old test data
 		        xepPersister.importSchema("Demo.Airport");   // import flat schema
@@ -41,13 +46,13 @@
 		        System.out.println("Generating stock info table...");
 				
 		        // Populate 5 airport objects and save to the database using XEP
-				popAirports(xepEvent);
+				populateAirports(xepEvent);
 				
 				// Get all airports using JDBC
 				getAirports(myStatement);
 				
 				// Store natively
-				StoreAirfare(irisNative);
+				//StoreAirfare(irisNative);
 					
 				//Close everything
 			    xepEvent.close();
@@ -58,7 +63,9 @@
 			}
 		        
 		}
-		public static void popAirports(Event xepEvent) {
+		
+		//Store objects directly to InterSystems IRIS
+		public static void populateAirports(Event xepEvent) {
 			ArrayList<Demo.Airport> airportList = new ArrayList<Demo.Airport>();
 			
 			//1. Boston
@@ -110,31 +117,31 @@
 			xepEvent.store(airportArray);
 			System.out.println("Stored 5 airports");
 		}
+		
+		///Display all airports using JDBC
 		public static void getAirports(Statement myStatement)
 		{
 			ResultSet myRS;
 			try {
 				myRS = myStatement.executeQuery("SELECT name,code,location FROM demo.airport");
 			
-				System.out.println("Name\t\t\t\t\tCode\t\tCity\t\tState");
+				System.out.println("Name\t\t\t\t\tCode\t\tCity");
 				while(myRS.next())
 				{
-					System.out.println(myRS.getString("name")+"\t\tcode: "+myRS.getString("code")+"\tcity: "/*+myRS.getString("city")*/);
+					System.out.println(myRS.getString("name")+"\t\tcode: "+myRS.getString("code")+"\tcity: ");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+		
+		///Create a custom data structure to store airfare in a graph-like structure and retrieve airfare based on nodes
+		///Takes departure airport and arrival airport as arguments
 		public static void StoreAirfare(IRIS irisNative)
-		{
-			Scanner scanner = new Scanner(System.in);
-			System.out.print("From what airport? ");
-			String fromAirport = scanner.next();
-			System.out.print("To what airport? ");
-			String toAirport = scanner.next();
-			
-			irisNative.set("Boston Logan Airport^Boston^MA","^AIRPORT", "BOS");
-			irisNative.set("Austin International Airport^Austin^TX","^AIRPORT", "AUS");
+		{		
+			//Store routes and distance between airports 
+			//This API sets the value, for a global, with the following keys
+			//For example, ^AIRPORT("BOS","AUS") = 1698
 			irisNative.set("1698","^AIRPORT", "BOS","AUS");
 			irisNative.set("450","^AIRPORT", "BOS","AUS","AA150");
 			irisNative.set("550","^AIRPORT", "BOS","AUS","AA290");
@@ -142,12 +149,21 @@
 			irisNative.set("700","^AIRPORT", "BOS","BIS","AA330");
 			irisNative.set("710","^AIRPORT", "BOS","BIS","UA208");
 			
-			String ifHasRoutes = ". This path has no routes";
+			//Prompt
+			Scanner scanner = new Scanner(System.in);
+			System.out.print("Enter departure airport: ");
+			String fromAirport = scanner.next();
+			System.out.print("Enter destination airport: ");
+			String toAirport = scanner.next();
+			
+			//Query for routes based on input
+			String hasRoutes = "This path has no routes";
 			int isDefined = irisNative.isDefined("^AIRPORT", fromAirport, toAirport);
 					
-			if (isDefined==11 || isDefined==1 ) { ifHasRoutes =  ". This path has routes"; } 
+			if (isDefined==11 || isDefined==1 ) { hasRoutes =  "This path has routes"; } 
 			System.out.println("");
-			System.out.println("Printed to ^AIRPORT global. The distance in miles between "+ fromAirport + " and " + toAirport + " is: " + irisNative.getString("^AIRPORT", fromAirport, toAirport) + ifHasRoutes );
+			System.out.println("Printed to ^AIRPORT global. The distance in miles between "+ fromAirport + " and " + toAirport + 
+					" is: " + irisNative.getString("^AIRPORT", fromAirport, toAirport) + ". " + hasRoutes );
 			
 			scanner.close();
 		}
