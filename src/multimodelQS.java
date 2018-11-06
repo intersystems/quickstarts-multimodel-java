@@ -1,3 +1,9 @@
+	/* Purpose: This demo shows using objects, SQL, and native access side-by-side in a Java application, 
+	* connecting to InterSystems IRIS.
+	*
+	* To Test: Run to see objects and SQL working side-by-side. Then uncomment the line to execute StoreAirfare to see
+	* creating a custom data structure using the Native API.	
+	*/
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
 	import java.sql.Statement;
@@ -51,8 +57,8 @@
 				// Get all airports using JDBC
 				getAirports(myStatement);
 				
-				// Store natively
-				//StoreAirfare(irisNative);
+				// Store natively - Uncomment the following line for task 3
+				// StoreAirfare(irisNative);
 					
 				//Close everything
 			    xepEvent.close();
@@ -88,7 +94,7 @@
 			
 			//3. Austin
 			Demo.Airport newAirport3 = new Demo.Airport();
-			newAirport3.name = "Austin–Bergstrom International";
+			newAirport3.name = "Austinâ€“Bergstrom International";
 			newAirport3.code = "AUS";
 			newAirport3.location = new Demo.Location();
 			newAirport3.location.city = "Austin";
