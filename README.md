@@ -1,2 +1,11 @@
 # multimodel-java-quickstart
-This quickstart can be found on learning.intersystems.com
+This quickstart can be found at https://learning.intersystems.com/course/view.php?name=Multimodel 
+It shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects, retrieved using SQL, and a custom data structure is created using the Native API to handle route information between airports.
+
+To run:
+1. Clone the repo
+2. Open in your favorite Java IDE
+3. Change Username, password, IP, port and username to point to your instance of InterSystems IRIS
+4. Execute the code
+
+
