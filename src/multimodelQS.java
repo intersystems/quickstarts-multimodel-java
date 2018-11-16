@@ -129,10 +129,8 @@ public class multimodelQS {
 		loc5.setState("IL");
 		loc5.setZip("60666");
 		newAirport5.setLocation(loc5);
-		//airportList.add(newAirport5);
 		airportArray[4] = newAirport5;
 		
-		//Demo.Airport[] airportArray = airportList.toArray(new Demo.Airport[airportList.size()]);
 		for (Demo.Airport a : airportArray){
 			xepEvent.store(a);
 		}

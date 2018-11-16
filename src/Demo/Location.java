@@ -19,11 +19,12 @@ public class Location {
 		this.state = state;
 	}
 
-	public Location(String city, String state, double longtitude, double latitude) {
+	public Location(String city, String state, double longtitude, double latitude, String zip) {
 		this.city = city;
 		this.state = state;
 		this.longtitude = longtitude;
 		this.latitude = latitude;
+		this.zip= zip;
 	}
 	
 	
