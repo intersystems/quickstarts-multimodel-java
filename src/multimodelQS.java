@@ -24,13 +24,14 @@ import com.intersystems.jdbc.IRISConnection;
 public class multimodelQS {
 	
 	public static void main(String[] args) {
+		//https://github.com/intersystems/quickstarts-multimodel-java/
 		String user = "SuperUser";
 		String pass = "SYS";
 		String server = "localhost";
 		int port = 51773;
 		
 		try {
-			//Connect to database using EventPersister, which is based on IRISDataSource
+		//Connect to database using EventPersister, which is based on IRISDataSource
 	        EventPersister xepPersister = PersisterFactory.createPersister();
 	        xepPersister.connect(server,port,"User",user,pass); 
 	        System.out.println("Connected to InterSystems IRIS via JDBC."); 
@@ -51,7 +52,7 @@ public class multimodelQS {
 	        
 	        
 	        //***Running code***
-	        System.out.println("Generating stock info table...");
+	        System.out.println("Generating airport table...");
 			
 	        // Populate 5 airport objects and save to the database using XEP
 			populateAirports(xepEvent);
@@ -100,7 +101,7 @@ public class multimodelQS {
 		
 		//3. Austin
 		Demo.Airport newAirport3 = new Demo.Airport();
-		newAirport3.setName("Austin–Bergstrom International");
+		newAirport3.setName("Austinâ€“Bergstrom International");
 		newAirport3.setCode("AUS");
 		Demo.Location loc3 = new Demo.Location();
 		loc3.setCity("Austin");
