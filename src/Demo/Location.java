@@ -27,7 +27,6 @@ public class Location {
 		this.zip= zip;
 	}
 	
-	
 	public String getZip() {
 		return zip;
 	}
