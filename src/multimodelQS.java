@@ -35,10 +35,8 @@ public class multimodelQS {
 	        EventPersister xepPersister = PersisterFactory.createPersister();
 	        xepPersister.connect(server,port,"User",user,pass); 
 	        System.out.println("Connected to InterSystems IRIS via JDBC."); 
-	        xepPersister.deleteExtent("Demo.Location");   // remove old test data
-	        xepPersister.importSchemaFull("Demo.Location");   // import flat schema
 	        xepPersister.deleteExtent("Demo.Airport");   // remove old test data
-	        xepPersister.importSchema("Demo.Airport");   // import flat schema
+	        xepPersister.importSchemaFull("Demo.Airport");   // import full schema
 	       
 	        //***Initializations***
 	        //Create XEP Event for object access
@@ -61,7 +59,7 @@ public class multimodelQS {
 			getAirports(myStatement);
 			
 			// Store natively - Uncomment the following line for task 3
-			//StoreAirfare(irisNative);
+			StoreAirfare(irisNative);
 				
 			//Close everything
 		    xepEvent.close();
@@ -101,7 +99,7 @@ public class multimodelQS {
 		
 		//3. Austin
 		Demo.Airport newAirport3 = new Demo.Airport();
-		newAirport3.setName("Austin–Bergstrom International");
+		newAirport3.setName("Austin-Bergstrom International");
 		newAirport3.setCode("AUS");
 		Demo.Location loc3 = new Demo.Location();
 		loc3.setCity("Austin");
@@ -132,9 +130,8 @@ public class multimodelQS {
 		newAirport5.setLocation(loc5);
 		airportArray[4] = newAirport5;
 		
-		for (Demo.Airport a : airportArray){
-			xepEvent.store(a);
-		}
+		xepEvent.store(airportArray);
+		
 		System.out.println("Stored 5 airports");
 	}
 	
