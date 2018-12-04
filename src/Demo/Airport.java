@@ -1,9 +1,11 @@
 package Demo;
 
+import com.intersystems.xep.annotations.Id;
 
 public class Airport {
-	private String name;
+	@Id(generated=false)
 	private String code;
+	private String name;
 	private Demo.Location location;
 
 	public Airport() {

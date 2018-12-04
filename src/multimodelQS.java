@@ -19,8 +19,8 @@ import com.intersystems.xep.XEPException;
 import com.intersystems.jdbc.IRISConnection;
 
 
-//Purpose: This class shows a multimodel example in Java. SQL is used to display airports,
-//objects are stored directly, and a custom data structure is used to determine airfare.
+// Purpose: This class shows a multimodel example in Java. SQL is used to display airports,
+// objects are stored directly, and a custom data structure is used to determine airfare.
 public class multimodelQS {
 	
 	public static void main(String[] args) {
@@ -31,23 +31,21 @@ public class multimodelQS {
 		int port = 51773;
 		
 		try {
-		//Connect to database using EventPersister, which is based on IRISDataSource
+			// Connect to database using EventPersister, which is based on IRISDataSource
 	        EventPersister xepPersister = PersisterFactory.createPersister();
 	        xepPersister.connect(server,port,"User",user,pass); 
 	        System.out.println("Connected to InterSystems IRIS via JDBC."); 
-	        xepPersister.deleteExtent("Demo.Location");   // remove old test data
-	        xepPersister.importSchemaFull("Demo.Location");   // import flat schema
-	        xepPersister.deleteExtent("Demo.Airport");   // remove old test data
-	        xepPersister.importSchema("Demo.Airport");   // import flat schema
+	        xepPersister.deleteExtent("Demo.Airport");   // Remove old test data
+	        xepPersister.importSchemaFull("Demo.Airport");   // Import full schema
 	       
 	        //***Initializations***
-	        //Create XEP Event for object access
+	        // Create XEP Event for object access
 	        Event xepEvent = xepPersister.getEvent("Demo.Airport");
 
-	        //Create JDBC statement object for SQL and IRIS Native access
+	        // Create JDBC statement object for SQL and IRIS Native access
 	        Statement myStatement = xepPersister.createStatement();
 	        
-	        //Create IRIS Native object
+	        // Create IRIS Native object
 	        IRIS irisNative = IRIS.createIRIS((IRISConnection)xepPersister);
 	        
 	        
@@ -61,9 +59,9 @@ public class multimodelQS {
 			getAirports(myStatement);
 			
 			// Store natively - Uncomment the following line for task 3
-			//StoreAirfare(irisNative);
+			// StoreAirfare(irisNative);
 				
-			//Close everything
+			// Close everything
 		    xepEvent.close();
 		    xepPersister.close();
 						
@@ -73,11 +71,11 @@ public class multimodelQS {
 	        
 	}
 	
-	//Store objects directly to InterSystems IRIS
+	// Store objects directly to InterSystems IRIS
 	public static void populateAirports(Event xepEvent) {	
 		Demo.Airport[] airportArray = new Demo.Airport[5];
 		
-		//1. Boston
+		// 1. Boston
 		Demo.Airport newAirport = new Demo.Airport();
 		newAirport.setName("Boston Logan International");
 		newAirport.setCode("BOS");
@@ -88,9 +86,9 @@ public class multimodelQS {
 		newAirport.setLocation(loc);
 		airportArray[0] = newAirport;
 		
-		//2. Philadephia
+		// 2. Philadelphia
 		Demo.Airport newAirport2 = new Demo.Airport();
-		newAirport2.setName("Philadephia International");
+		newAirport2.setName("Philadelphia International");
 		newAirport2.setCode("PHL");
 		Demo.Location loc2 = new Demo.Location();
 		loc2.setCity("Philadelphia");
@@ -99,9 +97,9 @@ public class multimodelQS {
 		newAirport2.setLocation(loc2);
 		airportArray[1] = newAirport2;
 		
-		//3. Austin
+		// 3. Austin
 		Demo.Airport newAirport3 = new Demo.Airport();
-		newAirport3.setName("Austin–Bergstrom International");
+		newAirport3.setName("Austin-Bergstrom International");
 		newAirport3.setCode("AUS");
 		Demo.Location loc3 = new Demo.Location();
 		loc3.setCity("Austin");
@@ -110,7 +108,7 @@ public class multimodelQS {
 		newAirport3.setLocation(loc3);
 		airportArray[2] = newAirport3;
 		
-		//4. San Francisco
+		// 4. San Francisco
 		Demo.Airport newAirport4 = new Demo.Airport();
 		newAirport4.setName("San Francisco International");
 		newAirport4.setCode("SFO");
@@ -121,7 +119,7 @@ public class multimodelQS {
 		newAirport4.setLocation(loc4);
 		airportArray[3] = newAirport4;
 		
-		//5. O'hare
+		// 5. O'hare
 		Demo.Airport newAirport5 = new Demo.Airport();
 		newAirport5.setName("Chicago O'hare International");
 		newAirport5.setCode("ORD");
@@ -132,13 +130,12 @@ public class multimodelQS {
 		newAirport5.setLocation(loc5);
 		airportArray[4] = newAirport5;
 		
-		for (Demo.Airport a : airportArray){
-			xepEvent.store(a);
-		}
+		xepEvent.store(airportArray);
+		
 		System.out.println("Stored 5 airports");
 	}
 	
-	///Display all airports using JDBC
+	// Display all airports using JDBC
 	public static void getAirports(Statement myStatement)
 	{
 		ResultSet myRS;
@@ -161,13 +158,13 @@ public class multimodelQS {
 		}
 	}
 	
-	///Create a custom data structure to store airfare in a graph-like structure and retrieve airfare based on nodes
-	///Takes departure airport and arrival airport as arguments
+	// Create a custom data structure to store airfare in a graph-like structure and retrieve airfare based on nodes
+	// Takes departure airport and arrival airport as arguments
 	public static void StoreAirfare(IRIS irisNative)
 	{		
-		//Store routes and distance between airports 
-		//This API sets the value, for a global, with the following keys
-		//For example, ^AIRPORT("BOS","AUS") = 1698
+		// Store routes and distance between airports 
+		// This API sets the value, for a global, with the following keys
+		// For example, ^AIRPORT("BOS","AUS") = 1698
 		irisNative.set("1698","^AIRPORT", "BOS","AUS");
 		irisNative.set("450","^AIRPORT", "BOS","AUS","AA150");
 		irisNative.set("550","^AIRPORT", "BOS","AUS","AA290");
@@ -175,14 +172,14 @@ public class multimodelQS {
 		irisNative.set("700","^AIRPORT", "BOS","BIS","AA330");
 		irisNative.set("710","^AIRPORT", "BOS","BIS","UA208");
 		
-		//Prompt
+		// Prompt
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Enter departure airport: ");
 		String fromAirport = scanner.next();
 		System.out.print("Enter destination airport: ");
 		String toAirport = scanner.next();
 		
-		//Query for routes based on input
+		// Query for routes based on input
 		String hasRoutes = "This path has no routes";
 		int isDefined = irisNative.isDefined("^AIRPORT", fromAirport, toAirport);
 				
