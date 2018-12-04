@@ -28,7 +28,7 @@ public class multimodelQS {
 		String user = "SuperUser";
 		String pass = "SYS";
 		String server = "localhost";
-		int port = 51773;
+		int port = 51775;
 		
 		try {
 			// Connect to database using EventPersister, which is based on IRISDataSource
@@ -73,7 +73,7 @@ public class multimodelQS {
 	
 	// Store objects directly to InterSystems IRIS
 	public static void populateAirports(Event xepEvent) {	
-		Demo.Airport[] airportArray = new Demo.Airport[5];
+		ArrayList<Demo.Airport> airportList = new ArrayList<Demo.Airport>();
 		
 		// 1. Boston
 		Demo.Airport newAirport = new Demo.Airport();
@@ -84,7 +84,7 @@ public class multimodelQS {
 		loc.setState("MA");
 		loc.setZip("02128");
 		newAirport.setLocation(loc);
-		airportArray[0] = newAirport;
+		airportList.add(newAirport);
 		
 		// 2. Philadelphia
 		Demo.Airport newAirport2 = new Demo.Airport();
@@ -95,7 +95,7 @@ public class multimodelQS {
 		loc2.setState("PA");
 		loc2.setZip("19153");
 		newAirport2.setLocation(loc2);
-		airportArray[1] = newAirport2;
+		airportList.add(newAirport2);
 		
 		// 3. Austin
 		Demo.Airport newAirport3 = new Demo.Airport();
@@ -106,7 +106,7 @@ public class multimodelQS {
 		loc3.setState("TX");
 		loc3.setZip("78719");
 		newAirport3.setLocation(loc3);
-		airportArray[2] = newAirport3;
+		airportList.add(newAirport3);
 		
 		// 4. San Francisco
 		Demo.Airport newAirport4 = new Demo.Airport();
@@ -117,7 +117,7 @@ public class multimodelQS {
 		loc4.setState("CA");
 		loc4.setZip("94128");
 		newAirport4.setLocation(loc4);
-		airportArray[3] = newAirport4;
+		airportList.add(newAirport4);
 		
 		// 5. O'hare
 		Demo.Airport newAirport5 = new Demo.Airport();
@@ -128,8 +128,9 @@ public class multimodelQS {
 		loc5.setState("IL");
 		loc5.setZip("60666");
 		newAirport5.setLocation(loc5);
-		airportArray[4] = newAirport5;
+		airportList.add(newAirport5);
 		
+		Demo.Airport[] airportArray = airportList.toArray(new Demo.Airport[airportList.size()]);
 		xepEvent.store(airportArray);
 		
 		System.out.println("Stored 5 airports");
