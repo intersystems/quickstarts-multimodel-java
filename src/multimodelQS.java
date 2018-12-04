@@ -28,7 +28,7 @@ public class multimodelQS {
 		String user = "SuperUser";
 		String pass = "SYS";
 		String server = "localhost";
-		int port = 51775;
+		int port = 51773;
 		
 		try {
 			// Connect to database using EventPersister, which is based on IRISDataSource
