@@ -86,7 +86,7 @@ public class multimodelQS {
 		newAirport.setLocation(loc);
 		airportArray[0] = newAirport;
 		
-		// Philadelphia
+		// 2. Philadelphia
 		Demo.Airport newAirport2 = new Demo.Airport();
 		newAirport2.setName("Philadelphia International");
 		newAirport2.setCode("PHL");
