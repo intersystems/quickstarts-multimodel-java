@@ -24,7 +24,7 @@ import com.intersystems.jdbc.IRISConnection;
 public class multimodelQS {
 	
 	public static void main(String[] args) {
-		//https://github.com/intersystems/quickstarts-multimodel-java/
+		// If you are using a remote instance, update IP and password here
 		String user = "SuperUser";
 		String pass = "SYS";
 		String server = "localhost";
@@ -32,6 +32,8 @@ public class multimodelQS {
 		
 		try {
 			// Connect to database using EventPersister, which is based on IRISDataSource
+			// For more details on EventPersister, visit 
+			// https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=AFL_xep
 	        EventPersister xepPersister = PersisterFactory.createPersister();
 	        xepPersister.connect(server,port,"User",user,pass); 
 	        System.out.println("Connected to InterSystems IRIS via JDBC."); 
@@ -47,8 +49,7 @@ public class multimodelQS {
 	        
 	        // Create IRIS Native object
 	        IRIS irisNative = IRIS.createIRIS((IRISConnection)xepPersister);
-	        
-	        
+	              
 	        //***Running code***
 	        System.out.println("Generating airport table...");
 			
@@ -66,7 +67,7 @@ public class multimodelQS {
 		    xepPersister.close();
 						
 		} catch (SQLException e) {
-			 System.out.println("Error creating stock listing: " + e.getMessage());
+			 System.out.println("Error creating airport listing: " + e.getMessage());
 		}
 	        
 	}
@@ -141,6 +142,8 @@ public class multimodelQS {
 	{
 		ResultSet myRS;
 		try {
+			// This query uses a special shorthand notation (->, known as an implicit join) 
+			// to retrieve data from a related table without requiring you to think about how to join tables
 			myRS = myStatement.executeQuery("SELECT name, code, location->city, location->state, location->zip FROM demo.airport");
 		
 			System.out.println("Name\t\t\t\t\tCode\t\tLocation");
@@ -148,7 +151,7 @@ public class multimodelQS {
 			{
 				System.out.println(
 						myRS.getString("name") + "\t\t" + 
-						myRS.getString("code")+"\t\t" + 
+						myRS.getString("code") + "\t\t" + 
 						myRS.getString("city") + ", " + 
 						myRS.getString("state") + " " + 
 						myRS.getString("zip")
