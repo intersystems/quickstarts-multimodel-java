@@ -19,15 +19,15 @@ import com.intersystems.xep.XEPException;
 import com.intersystems.jdbc.IRISConnection;
 
 
-// Purpose: This class shows a multimodel example in Java. SQL is used to display airports,
+// Purpose: This class shows a multi-model example in Java. SQL is used to display airports,
 // objects are stored directly, and a custom data structure is used to determine airfare.
 public class multimodelQS {
 	
 	public static void main(String[] args) {
 		// If you are using a remote instance, update IP and password here
-		String user = "SuperUser";
-		String pass = "SYS";
-		String server = "localhost";
+		String username = "SuperUser";
+		String password = "SYS";
+		String IP = "localhost";
 		int port = 51773;
 		
 		try {
@@ -35,7 +35,7 @@ public class multimodelQS {
 			// For more details on EventPersister, visit 
 			// https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=AFL_xep
 	        EventPersister xepPersister = PersisterFactory.createPersister();
-	        xepPersister.connect(server,port,"User",user,pass); 
+	        xepPersister.connect(IP, port, "User", username, password); 
 	        System.out.println("Connected to InterSystems IRIS via JDBC."); 
 	        xepPersister.deleteExtent("Demo.Airport");   // Remove old test data
 	        xepPersister.importSchemaFull("Demo.Airport");   // Import full schema
