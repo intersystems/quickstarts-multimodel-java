@@ -5,8 +5,6 @@ It shows object, relational, and native access from a Java application to InterS
 ## To run in InterSystems Learning Labs, AWS, GCP, or Azure
 1. Open multimodelQS.java and modify the IP and port to be the values for your cloud node. Verify username and password as well.
 2. In the integrated terminal, run the following lines to compile the classes  
-`javac -cp ".:../lib/intersystems-jdbc-3.0.0.jar:../lib/intersystems-xep-3.0.0.jar" Demo/Airport.java`  
-`javac -cp ".:../lib/intersystems-jdbc-3.0.0.jar:../lib/intersystems-xep-3.0.0.jar" Demo/Location.java`  
 `javac -cp ".:../lib/intersystems-jdbc-3.0.0.jar:../lib/intersystems-xep-3.0.0.jar" multimodelQS.java`  
 3. Run multimodelQS  
 `java -cp ".:../lib/intersystems-xep-3.0.0.jar:../lib/intersystems-jdbc-3.0.0.jar" multimodelQS`  
