@@ -2,14 +2,14 @@
 This quickstart can be found at [https://learning.intersystems.com/course/view.php?name=Multimodel](https://learning.intersystems.com/course/view.php?name=Multimodel). 
 It shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects, retrieved using SQL, and a custom data structure is created using the Native API to handle route information between airports.
 
-## To run in InterSystems Learning Labs, AWS, GCP, or Azure
-1. Open multimodelQS.java and modify the IP and port to be the values for your cloud node. Verify username and password as well.
+## To run in InterSystems Learning Labs or Evaluator Edition (on AWS, GCP, or Azure)
+1. For AWS, GCP, or Azure ONLY: Open multimodelQS.java and modify the IP to be "try-iris". Verify username and password as well. (Please skip this step if using InterSystems Learning Labs)
 2. In the integrated terminal, run the following lines to compile the classes  
 `javac -cp ".:../lib/intersystems-jdbc-3.0.0.jar:../lib/intersystems-xep-3.0.0.jar" multimodelQS.java`  
 3. Run multimodelQS  
 `java -cp ".:../lib/intersystems-xep-3.0.0.jar:../lib/intersystems-jdbc-3.0.0.jar" multimodelQS`  
 
-## How to run locally
+## To run locally
 1. Clone the repo and open in your Java IDE
 2. In `multimodelQS.java`, change username, password, IP, port and namespace to point to your instance of InterSystems IRIS
 3. Run multimodelQS
