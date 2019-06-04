@@ -1,7 +1,7 @@
 /* Purpose: This demo shows using objects, SQL, and native access side-by-side in a Java application, 
 * connecting to InterSystems IRIS.
 *
-* To Test: Run to see objects and SQL working side-by-side. Then uncomment the line to execute StoreAirfare to see
+* To Test: Run to see objects and SQL working side-by-side. Then uncomment the line to execute storeAirfare to see
 * creating a custom data structure using the Native API.	
 */
 import java.sql.ResultSet;
@@ -60,7 +60,7 @@ public class multimodelQS {
 			getAirports(myStatement);
 			
 			// Store natively - Uncomment the following line for task 3
-			// StoreAirfare(irisNative);
+			// storeAirfare(irisNative);
 				
 			// Close everything
 		    xepEvent.close();
@@ -164,17 +164,17 @@ public class multimodelQS {
 	
 	// Create a custom data structure to store airfare in a graph-like structure and retrieve airfare based on nodes
 	// Takes departure airport and arrival airport as arguments
-	public static void StoreAirfare(IRIS irisNative)
+	public static void storeAirfare(IRIS irisNative)
 	{		
 		// Store routes and distance between airports 
 		// This API sets the value, for a global, with the following keys
-		// For example, ^AIRPORT("BOS","AUS") = 1698
-		irisNative.set("1698","^AIRPORT", "BOS","AUS");
-		irisNative.set("450","^AIRPORT", "BOS","AUS","AA150");
-		irisNative.set("550","^AIRPORT", "BOS","AUS","AA290");
-		irisNative.set("200","^AIRPORT", "BOS","PHL","UA110");
-		irisNative.set("700","^AIRPORT", "BOS","BIS","AA330");
-		irisNative.set("710","^AIRPORT", "BOS","BIS","UA208");
+		// For example, ^airport("BOS","AUS") = 1698
+		irisNative.set("1698","^airport", "BOS","AUS");
+		irisNative.set("450","^airport", "BOS","AUS","AA150");
+		irisNative.set("550","^airport", "BOS","AUS","AA290");
+		irisNative.set("200","^airport", "BOS","PHL","UA110");
+		irisNative.set("700","^airport", "BOS","BIS","AA330");
+		irisNative.set("710","^airport", "BOS","BIS","UA208");
 		
 		// Prompt
 		Scanner scanner = new Scanner(System.in);
@@ -185,12 +185,12 @@ public class multimodelQS {
 		
 		// Query for routes based on input
 		String hasRoutes = "This path has no routes";
-		int isDefined = irisNative.isDefined("^AIRPORT", fromAirport, toAirport);
+		int isDefined = irisNative.isDefined("^airport", fromAirport, toAirport);
 				
 		if (isDefined==11 || isDefined==1 ) { hasRoutes =  "This path has routes"; } 
 		System.out.println("");
-		System.out.println("Printed to ^AIRPORT global. The distance in miles between "+ fromAirport + " and " + toAirport + 
-				" is: " + irisNative.getString("^AIRPORT", fromAirport, toAirport) + ". " + hasRoutes );
+		System.out.println("Printed to ^airport global. The distance in miles between "+ fromAirport + " and " + toAirport + 
+				" is: " + irisNative.getString("^airport", fromAirport, toAirport) + ". " + hasRoutes );
 			
 			scanner.close();
 		}
