@@ -21,7 +21,6 @@ If you would like to see how to store data natively using Java:
 1. Find and uncomment the following line:  
 `// storeAirfare(irisNative);`  
 `// checkAirfare(irisNative);`  
-2. Enter departure airport: **
 2. Enter departure airport: **BOS**
 3. Enter destination airport: **AUS**
 
