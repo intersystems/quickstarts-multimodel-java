@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 
 import com.intersystems.jdbc.IRIS;
+import com.intersystems.jdbc.IRISIterator;
 import com.intersystems.xep.Event;
 import com.intersystems.xep.EventPersister;
 import com.intersystems.xep.PersisterFactory;
@@ -162,37 +163,60 @@ public class multimodelQS {
 		}
 	}
 	
-	// Create a custom data structure to store airfare in a graph-like structure and retrieve airfare based on nodes
-	// Takes departure airport and arrival airport as arguments
+	// Create a custom data structure to store airport distance and airfare information in a graph-like structure.
+	// Query this information with the interactive checkAirfare() method
 	public static void storeAirfare(IRIS irisNative)
 	{		
 		// Store routes and distance between airports 
-		// This API sets the value, for a global, with the following keys
-		// For example, ^airport("BOS","AUS") = 1698
+		// The global we'll populate has two levels:
+		// ^airport(from, to) = distance
+		// ^airport(from, to, flight) = fare
+		
+		// This IRIS native API sets the value for a global at the specified subscript level(s)
+		// For example, to set ^airport("BOS","AUS") = 1698
 		irisNative.set("1698","^airport", "BOS","AUS");
 		irisNative.set("450","^airport", "BOS","AUS","AA150");
 		irisNative.set("550","^airport", "BOS","AUS","AA290");
+		
+		irisNative.set("280","^airport", "BOS","PHL");
 		irisNative.set("200","^airport", "BOS","PHL","UA110");
+		
+		irisNative.set("1490","^airport", "BOS","BIS");
 		irisNative.set("700","^airport", "BOS","BIS","AA330");
 		irisNative.set("710","^airport", "BOS","BIS","UA208");
 		
-		// Prompt
+		System.out.println("Stored fare and distance data in ^airport global.")
+	}
+	
+	// Simple interactive method using IRIS native API to consult the data structure populated in storeAirfare()
+	public static void checkAirfare(IRIS irisNative)
+	{		
+		// Prompt for input
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("Enter departure airport: ");
+		System.out.print("Enter departure airport: (e.g. BOS)");
 		String fromAirport = scanner.next();
-		System.out.print("Enter destination airport: ");
+		System.out.print("Enter destination airport: (e.g. AUS)");
 		String toAirport = scanner.next();
+		scanner.close();
 		
-		// Query for routes based on input
-		String hasRoutes = "This path has no routes";
-		int isDefined = irisNative.isDefined("^airport", fromAirport, toAirport);
-				
-		if (isDefined==11 || isDefined==1 ) { hasRoutes =  "This path has routes"; } 
+		// ^airport(from, to) = distance
 		System.out.println("");
-		System.out.println("Printed to ^airport global. The distance in miles between "+ fromAirport + " and " + toAirport + 
-				" is: " + irisNative.getString("^airport", fromAirport, toAirport) + ". " + hasRoutes );
-			
-			scanner.close();
+		System.out.println("The distance in miles between "+ fromAirport + " and " + toAirport + 
+					" is: " + irisNative.getString("^airport", fromAirport, toAirport) + ".");
+		
+		// Now loop through routes: ^airport(from, to, flight) = fare
+		int isDefined = irisNative.isDefined("^airport", fromAirport, toAirport);
+		if (isDefined==11 || isDefined==1 ) {
+			System.out.println("The following routes exist for this path:");
+			IRISIterator iterator = irisNative.getIRISIterator("^airport", fromAirport, toAirport);
+			while (iterator.hasNext()) {
+				String fare = iterator.next();
+				String flightNumber = iterator.getSubscriptValue();
+				System.out.println("  - " + flightNumber + ": " + fare + " USD");
+			}
+		} else {
+			System.out.println("No routes exist for this path.");
 		}
+	}
 
 }
