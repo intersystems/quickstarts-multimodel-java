@@ -1,8 +1,8 @@
 /* Purpose: This demo shows using objects, SQL, and native access side-by-side in a Java application, 
 * connecting to InterSystems IRIS.
 *
-* To Test: Run to see objects and SQL working side-by-side. Then uncomment the line to execute storeAirfare to see
-* creating a custom data structure using the Native API.	
+* To Test: Run to see objects and SQL working side-by-side. Then uncomment the lines to execute storeAirfare and checkAirfare to see how
+* to create a custom data structure using the Native API.	
 */
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,6 +62,7 @@ public class multimodelQS {
 			
 			// Store natively - Uncomment the following line for task 3
 			// storeAirfare(irisNative);
+			// checkAirfare(irisNative);
 				
 			// Close everything
 		    xepEvent.close();
@@ -185,7 +186,7 @@ public class multimodelQS {
 		irisNative.set("700","^airport", "BOS","BIS","AA330");
 		irisNative.set("710","^airport", "BOS","BIS","UA208");
 		
-		System.out.println("Stored fare and distance data in ^airport global.")
+		System.out.println("Stored fare and distance data in ^airport global.");
 	}
 	
 	// Simple interactive method using IRIS native API to consult the data structure populated in storeAirfare()
