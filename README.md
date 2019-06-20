@@ -1,4 +1,4 @@
-# Multi-Model QuickStart for Java
+# Multi-Model QuickStart for Java Code Sample
 
 This code shows multi-model access to InterSystems IRIS Data Platform in Java.
 
