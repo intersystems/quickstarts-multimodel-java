@@ -211,8 +211,8 @@ public class multimodelQS {
 			System.out.println("The following routes exist for this path:");
 			IRISIterator iterator = irisNative.getIRISIterator("^airport", fromAirport, toAirport);
 			while (iterator.hasNext()) {
-				String fare = iterator.next();
-				String flightNumber = iterator.getSubscriptValue();
+				String flightNumber = iterator.next();
+                		String fare = (String) iterator.getValue();
 				System.out.println("  - " + flightNumber + ": " + fare + " USD");
 			}
 		} else {
