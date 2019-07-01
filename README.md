@@ -1,16 +1,16 @@
 # Multi-Model QuickStart for Java Code Sample
 
-This code shows multi-model access to InterSystems IRIS Data Platform in Java.
+This code shows multi-model access to InterSystems IRIS data platform in Java.
 
 This sample is used in the [Multi-Model QuickStart](https://learning.intersystems.com/course/view.php?name=Multimodel). 
-It shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects, retrieved using SQL, and a custom data structure is created using the Native API to handle route information between airports.
+It shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects and retrieved using SQL, and a custom data structure is created using the Native API to handle route information between airports.
 
 ## Run the Sample
 
-1. In the integrated terminal, run the following lines to compile the classes  
+1. In the integrated terminal, run the following lines to compile the classes:  
 * `cd /home/project/quickstarts-multimodel-java/src`  
 * `javac -cp ".:../lib/intersystems-jdbc-3.0.0.jar:../lib/intersystems-xep-3.0.0.jar" multimodelQS.java`  
-2. Run multimodelQS  
+2. Run multimodelQS:
 `java -cp ".:../lib/intersystems-xep-3.0.0.jar:../lib/intersystems-jdbc-3.0.0.jar" multimodelQS`  
 
 ## Output
@@ -18,7 +18,7 @@ It shows object, relational, and native access from a Java application to InterS
 If all works correctly, you will see a list of airports output. Data is stored using XEP (objects) and retrieved using JDBC (relationally).  
 
 If you would like to see how to store data natively using Java:
-1. Find and uncomment the following line:  
+1. Find and uncomment the following lines:  
 `// storeAirfare(irisNative);`  
 `// checkAirfare(irisNative);`  
 2. Enter departure airport: **BOS**
