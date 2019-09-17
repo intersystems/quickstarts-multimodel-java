@@ -1,5 +1,5 @@
 # multimodel-java-quickstart
-This QuickStart can be found at the [multi-model QuickStart page](https://gettingstarted.intersystems.com/multimodel-overview/multimodel-quickstart/). 
+This quickstart can be found at [https://learning.intersystems.com/course/view.php?name=Multimodel](https://learning.intersystems.com/course/view.php?name=Multimodel). 
 It shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects, retrieved using SQL, and a custom data structure is created using the Native API to handle route information between airports.
 
 ## To run in InterSystems Learning Labs or Evaluator Edition (on AWS, GCP, or Azure)
