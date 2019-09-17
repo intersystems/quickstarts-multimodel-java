@@ -2,7 +2,7 @@
 
 This code shows multi-model access to InterSystems IRIS data platform in Java.
 
-This sample is used in the [Multi-Model QuickStart](https://learning.intersystems.com/course/view.php?name=Multimodel). 
+This sample is used in the [Multi-Model QuickStart](https://gettingstarted.intersystems.com/multimodel-overview/multimodel-quickstart/). 
 It shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects and retrieved using SQL, and a custom data structure is created using the Native API to handle route information between airports.
 
 ## Run the Sample
@@ -37,4 +37,4 @@ Other routes may be null.
 
 ## Keep Exploring
 
-To continue with another Java example with InterSystems IRIS, see the [Java QuickStart](https://learning.intersystems.com/course/view.php?name=Java%20QS).
+To continue with another Java example with InterSystems IRIS, see the [Java QuickStart](https://gettingstarted.intersystems.com/language-quickstarts/java-quickstart/).
