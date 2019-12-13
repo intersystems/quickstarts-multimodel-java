@@ -207,7 +207,7 @@ public class multimodelQS {
 		
 		// Now loop through routes: ^airport(from, to, flight) = fare
 		int isDefined = irisNative.isDefined("^airport", fromAirport, toAirport);
-		if (isDefined==11 || isDefined==1 ) {
+		if (isDefined==11) {
 			System.out.println("The following routes exist for this path:");
 			IRISIterator iterator = irisNative.getIRISIterator("^airport", fromAirport, toAirport);
 			while (iterator.hasNext()) {
