@@ -10,11 +10,11 @@ It shows object, relational, and native access from a Java application to InterS
 1. In the integrated terminal, run the following lines to compile the classes:
 
   * `cd /home/project/quickstarts-multimodel-java/src`  
-  * `javac -cp ".:../lib/intersystems-jdbc-3.0.0.jar:../lib/intersystems-xep-3.0.0.jar" multimodelQS.java`  
+  * `javac -cp ".:../lib/intersystems-jdbc-3.2.0.jar:../lib/intersystems-xep-3.2.0.jar" multimodelQS.java`  
   
 2. Run multimodelQS:
 
-  * `java -cp ".:../lib/intersystems-xep-3.0.0.jar:../lib/intersystems-jdbc-3.0.0.jar" multimodelQS` 
+  * `java -cp ".:../lib/intersystems-xep-3.2.0.jar:../lib/intersystems-jdbc-3.2.0.jar" multimodelQS` 
   
 ## Run the sample code locally
 
