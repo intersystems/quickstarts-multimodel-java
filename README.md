@@ -1,46 +1,40 @@
 # Multi-Model QuickStart for Java Code Sample
 
-This code shows multi-model access to InterSystems IRIS data platform in Java.
+## In this repo
+.  
+├── LICENSE  
+├── README.md  
+└── src  
+    ├── Demo  
+    │   ├── Airport.java  
+    │   └── Location.java  
+    └── multimodelQS.java  
 
-This sample is used in the [Multi-Model exercise](https://learning.intersystems.com/course/view.php?name=Multimodel) on the InterSystems Learning site. 
-It shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects and retrieved using SQL, and a custom data structure is created using the Native API to handle route information between airports.
+## Guided Tutorial
+For a guided tutorial using this sample, visit [Accessing Data in Java Using Multiple Data Models](https://learning.intersystems.com/course/view.php?name=JavaMultiModel) on the InterSystems learning site. 
 
-## Run the sample code in the InterSystems Learning Labs or Evaluator Edition (on AWS, GCP, or Azure)
+## How to use this sample on your own
+This sample code shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects and retrieved using SQL, and a custom data structure is created using to handle route information between airports.
 
-1. In the integrated terminal, run the following lines to compile the classes:
+1. Start with an installation of Java and a running instance of InterSystems IRIS.
+2. Download the latest JDBC driver for Java from the [InterSystems Drivers Download page](https://intersystems-community.github.io/iris-driver-distribution/)
+3. Add the InterSystems JDBC driver to your CLASSPATH according to the [Connection Your Application documentation page](https://docs.intersystems.com/components/csp/docbook/DocBook.UI.Page.cls?KEY=ADRIVE#ADRIVE_jdbc)
+4. Clone this repository and open it in your preferred IDE.
+5. In `multimodelQS.java`, on lines 29-32, change username, password, IP, port and namespace to point to your instance of InterSystems IRIS
+6. Compile the project and run multimodelQS.java. If all works correctly, you will see a list of airports output. Data is stored using XEP (objects) and retrieved using JDBC (relationally).  
+7. If you would like to see how to store data natively using Java:
+    1. Find and uncomment the following lines:  
+    ```
+    // storeAirfare(irisNative);  
+    // checkAirfare(irisNative);  
+    ```
+    2. Enter departure airport: **BOS**
+    3. Enter destination airport: **AUS**
 
-  * `cd /home/project/quickstarts-multimodel-java/src`  
-  * `javac -cp ".:../lib/intersystems-jdbc-3.2.0.jar:../lib/intersystems-xep-3.2.0.jar" multimodelQS.java`  
-  
-2. Run multimodelQS:
+    The output should say:  
+    >Printed to ^airport global. The distance in miles between BOS and AUS is: 1698.  
+    >The following routes exist for this path:  
+    >  -AA150: 450 USD  
+    >  -AA290: 550 USD 
 
-  * `java -cp ".:../lib/intersystems-xep-3.2.0.jar:../lib/intersystems-jdbc-3.2.0.jar" multimodelQS` 
-  
-## Run the sample code locally
-
-1. Clone the repo and open in your Java IDE
-2. In `multimodelQS.java`, change username, password, IP, port and namespace to point to your instance of InterSystems IRIS
-3. Run multimodelQS
-
-## Output
-
-If all works correctly, you will see a list of airports output. Data is stored using XEP (objects) and retrieved using JDBC (relationally).  
-
-If you would like to see how to store data natively using Java:
-1. Find and uncomment the following lines:  
-`// storeAirfare(irisNative);`  
-`// checkAirfare(irisNative);`  
-2. Enter departure airport: **BOS**
-3. Enter destination airport: **AUS**
-
-The output should say:  
->Printed to ^airport global. The distance in miles between BOS and AUS is: 1698.  
->The following routes exist for this path:  
->  -AA150: 450 USD  
->  -AA290: 550 USD 
-
-Other routes may be null.
-
-## Keep Exploring
-
-To continue with another Java example with InterSystems IRIS, see the [Java QuickStart](https://gettingstarted.intersystems.com/language-quickstarts/java-quickstart/).
+    Other routes may be null.
