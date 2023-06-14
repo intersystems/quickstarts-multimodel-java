@@ -26,8 +26,8 @@ public class multimodelQS {
 	
 	public static void main(String[] args) {
 		// If you are using a remote instance, update IP and password here
-		String username = "SuperUser";
-		String password = "SYS";
+		String username = "tech";
+		String password = "demo";
 		String IP = "localhost";
 		int port = 51773;
 		
