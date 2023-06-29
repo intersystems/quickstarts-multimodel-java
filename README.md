@@ -4,6 +4,8 @@
 .  
 ├── LICENSE  
 ├── README.md  
+├── lib
+    └── .keep  
 └── src  
     ├── Demo  
     │   ├── Airport.java  
@@ -17,19 +19,18 @@ For a guided tutorial using this sample, visit [Accessing Data in Java Using Mul
 This sample code shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects and retrieved using SQL, and a custom data structure is created using to handle route information between airports.
 
 1. Start with an installation of Java and a running instance of InterSystems IRIS.
-2. Download the latest JDBC driver for Java from the [InterSystems Drivers Download page](https://intersystems-community.github.io/iris-driver-distribution/)
-3. Add the InterSystems JDBC driver to your CLASSPATH according to the [Connection Your Application documentation page](https://docs.intersystems.com/components/csp/docbook/DocBook.UI.Page.cls?KEY=ADRIVE#ADRIVE_jdbc)
-4. Clone this repository and open it in your preferred IDE.
+2. Download the appropriate JDBC and XEP drivers for your system from the [InterSystems Drivers Download page](https://intersystems-community.github.io/iris-driver-distribution/)
+3. Clone this repository and open it in your preferred IDE.
+4. Add the drivers to the `lib` folder of this repo, or to your CLASSPATH according to the [Connection Your Application documentation page](https://docs.intersystems.com/components/csp/docbook/DocBook.UI.Page.cls?KEY=ADRIVE#ADRIVE_jdbc).
 5. In `multimodelQS.java`, on lines 29-32, change username, password, IP, port and namespace to point to your instance of InterSystems IRIS
-6. Compile the project and run multimodelQS.java. If all works correctly, you will see a list of airports output. Data is stored using XEP (objects) and retrieved using JDBC (relationally).  
-7. If you would like to see how to store data natively using Java:
-    1. Find and uncomment the following lines:  
+6. If you would like to see how to store data natively using Java, find and uncomment the following lines:  
     ```
     // storeAirfare(irisNative);  
     // checkAirfare(irisNative);  
     ```
-    2. Enter departure airport: **BOS**
-    3. Enter destination airport: **AUS**
+7. Compile the project and run multimodelQS.java. If all works correctly, you will see a list of airports output. Data is stored using XEP (objects) and retrieved using JDBC (relationally). 
+    1. Enter departure airport: **BOS**
+    2. Enter destination airport: **AUS**
 
     The output should say:  
     >Printed to ^airport global. The distance in miles between BOS and AUS is: 1698.  
