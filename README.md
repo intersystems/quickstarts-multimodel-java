@@ -16,7 +16,7 @@
 For a guided tutorial using this sample, visit [Accessing Data in Java Using Multiple Data Models](https://learning.intersystems.com/course/view.php?name=JavaMultiModel) on the InterSystems learning site. 
 
 ## How to use this sample on your own
-This sample code shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects and retrieved using SQL, and a custom data structure is created using to handle route information between airports.
+This sample code shows object, relational, and native access from a Java application to InterSystems IRIS. Airport data is stored using objects and retrieved using SQL, and a custom data structure is created using globals to handle route information between airports.
 
 1. Start with an installation of Java and a running instance of InterSystems IRIS.
 2. Download the appropriate JDBC and XEP drivers for your system from the [InterSystems Drivers Download page](https://intersystems-community.github.io/iris-driver-distribution/)
