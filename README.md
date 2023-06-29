@@ -21,7 +21,7 @@ This sample code shows object, relational, and native access from a Java applica
 1. Start with an installation of Java and a running instance of InterSystems IRIS.
 2. Download the appropriate JDBC and XEP drivers for your system from the [InterSystems Drivers Download page](https://intersystems-community.github.io/iris-driver-distribution/)
 3. Clone this repository and open it in your preferred IDE.
-4. Add the drivers to the `lib` folder of this repo, or to your CLASSPATH according to the [Connection Your Application documentation page](https://docs.intersystems.com/components/csp/docbook/DocBook.UI.Page.cls?KEY=ADRIVE#ADRIVE_jdbc).
+4. Add the drivers to the `lib` folder of this repo, or to your CLASSPATH according to the [Connecting Your Application documentation page](https://docs.intersystems.com/components/csp/docbook/DocBook.UI.Page.cls?KEY=ADRIVE#ADRIVE_jdbc).
 5. In `multimodelQS.java`, on lines 29-32, change username, password, IP, port and namespace to point to your instance of InterSystems IRIS
 6. If you would like to see how to store data natively using Java, find and uncomment the following lines:  
     ```
